@@ -59,11 +59,11 @@ public class Controller implements ActionListener, MouseWheelListener {
 			vi.getPrincipal().setVisible(false);
 			String aux = vi.buscar();
 			if (aux.contentEquals("")) {
-				JOptionPane.showMessageDialog(null, "Debe ingresar algun valor");
+				vi.mostrar("Debe ingresar algun valor");
 				vi.getPrincipal().setVisible(true);
 			} else {
 				if (canDAO.buscarUnCandidato(Long.parseLong(aux), lst) == null) {
-					JOptionPane.showMessageDialog(null, "La cedula no coincide con ningun candidato");
+					vi.mostrar("La cedula no coincide con ningun candidato");
 					vi.getPrincipal().setVisible(true);
 				} else {
 					CandidatoDTO del = canDAO.buscarUnCandidato(Long.parseLong(aux), lst);
@@ -80,14 +80,14 @@ public class Controller implements ActionListener, MouseWheelListener {
 			vi.getPrincipal().setVisible(false);
 			String aux = vi.buscar();
 			if (aux == null) {
-				JOptionPane.showMessageDialog(null, "Debe ingresar algun valor");
+				vi.mostrar("Debe ingresar algun valor");
 				vi.getPrincipal().setVisible(true);
 			} else if (aux.contentEquals("")) {
-				JOptionPane.showMessageDialog(null, "Debe ingresar algun valor");
+				vi.mostrar("Debe ingresar algun valor");
 				vi.getPrincipal().setVisible(true);
 			} else {
 				if (canDAO.buscarUnCandidato(Long.parseLong(aux), lst) == null) {
-					JOptionPane.showMessageDialog(null, "La cedula no coincide con ningun candidato");
+					vi.mostrar("La cedula no coincide con ningun candidato");
 					vi.getPrincipal().setVisible(true);
 				} else {
 					CandidatoDTO del = canDAO.buscarUnCandidato(Long.parseLong(aux), lst);
@@ -108,20 +108,20 @@ public class Controller implements ActionListener, MouseWheelListener {
 			try {
 				ced = vi.getCrear().getCedula().getText();				
 			} catch ( NumberFormatException e2) {
-				JOptionPane.showInternalMessageDialog(null, "La cedula no esta en formato valido", "ERROR", JOptionPane.ERROR_MESSAGE, null);
+				vi.error("La cedula no esta en formato valido");
 				return;
 			}
 			String ed = vi.getCrear().getEdad().getText();
 			if (nombre.contentEquals("") || apellido.contentEquals("") || cargo.contentEquals("")
 					|| ced.contentEquals("") || ed.contentEquals("")) {
-				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos");
+				vi.mostrar("Por favor ingrese todos los datos");
 			} else if (Integer.parseInt(vi.getCrear().getEdad().getText()) < 0
 					|| Integer.parseInt(vi.getCrear().getEdad().getText()) > 100) {
-				JOptionPane.showMessageDialog(null, "La edad no es valida");
+				vi.mostrar("La edad no es valida");
 			} else {
 				long cedula = Long.parseLong(vi.getCrear().getCedula().getText());
 				int edad = Integer.parseInt(vi.getCrear().getEdad().getText());
-				canDAO.agregar_Candidato(nombre, apellido, cargo, cedula, edad, lst);
+				vi.mostrar(canDAO.agregar_Candidato(nombre, apellido, cargo, cedula, edad, lst));
 				vi.getCrear().getNombre().setText("");
 				vi.getCrear().getApellido().setText("");
 				vi.getCrear().getCargo().setText("");
@@ -167,7 +167,7 @@ public class Controller implements ActionListener, MouseWheelListener {
 				
 			}
 		} else if (pt.equals("ELIMINAR2")) {
-			canDAO.eliminarUsuario(eliminar, lst);
+			vi.mostrar(canDAO.eliminarUsuario(eliminar, lst));
 			vi.getEliminar().getNombre().setText("");
 			vi.getEliminar().getApellido().setText("");
 			vi.getEliminar().getCargo().setText("");
@@ -197,14 +197,14 @@ public class Controller implements ActionListener, MouseWheelListener {
 			vi.getPrincipal().setVisible(false);
 			String aux = vi.buscar();
 			if (aux == null) {
-				JOptionPane.showMessageDialog(null, "Debe ingresar algun valor");
+				vi.mostrar("Debe ingresar algun valor");
 				vi.getPrincipal().setVisible(true);
 			} else if (aux.contentEquals("")) {
-				JOptionPane.showMessageDialog(null, "Debe ingresar algun valor");
+				vi.mostrar("Debe ingresar algun valor");
 				vi.getPrincipal().setVisible(true);
 			} else {
 				if (canDAO.buscarUnCandidato(Long.parseLong(aux), lst) == null) {
-					JOptionPane.showMessageDialog(null, "La cedula no coincide con ningun candidato");
+					vi.mostrar("La cedula no coincide con ningun candidato");
 					vi.getPrincipal().setVisible(true);
 				} else {
 			CandidatoDTO mod = canDAO.buscarUnCandidato(Long.parseLong(aux), lst);
@@ -231,14 +231,12 @@ public class Controller implements ActionListener, MouseWheelListener {
 			String ed = vi.getCrear().getEdad().getText();
 			if (nombre.contentEquals("") || apellido.contentEquals("") || cargo.contentEquals("")
 					|| ced.contentEquals("") || ed.contentEquals("")) {
-				JOptionPane.showMessageDialog(null, "Por favor ingrese todos los datos");
+				vi.mostrar("Por favor ingrese todos los datos");
 			} else if (Integer.parseInt(vi.getCrear().getEdad().getText()) < 0
 					|| Integer.parseInt(vi.getCrear().getEdad().getText()) > 100) {
-				JOptionPane.showMessageDialog(null, "La edad no es valida");
+				vi.mostrar("La edad no es valida");
 			}else {
-				
-				canDAO.modificar_Candidato(nombre, apellido, cargo, Long.parseLong(ced), Integer.parseInt(ed), lst);
-				
+				vi.mostrar(canDAO.modificar_Candidato(nombre, apellido, cargo, Long.parseLong(ced), Integer.parseInt(ed), lst));
 			}
 			
 			vi.getCrear().getNombre().setText("");

@@ -8,6 +8,7 @@ package clienteBs;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -22,7 +23,7 @@ public class Cliente extends Thread{
     // initialize socket and input output streams 
     private Socket socket;
     private ServerSocket server; 
-    private Scanner sn;
+    private File archivo = new File("./data/candidatos.dat");
     private DataOutputStream out;
     private DataInputStream in; //Input stream from server
     private String address;
@@ -37,8 +38,6 @@ public class Cliente extends Thread{
         this.out= null;
         this.address=address;
         this.port=port;
-        
-        
       
     }
     
@@ -46,7 +45,7 @@ public class Cliente extends Thread{
     public void run() {
     	
     	// string to read message from input 
-        String line = "gay"; 
+        String line = ""; 
   
     	// keep reading until "Over" is input 
         while (!line.equals("Over")) 

@@ -28,23 +28,26 @@ public class CandidatoDAO {
 		return encontrado;
 	}
 
-	public boolean agregar_Candidato(String nombre, String apellido, String cargo, long cedula, int edad,
+	public String agregar_Candidato(String nombre, String apellido, String cargo, long cedula, int edad,
 			ArrayList<CandidatoDTO> lst) {
 
 		CandidatoDTO agregar = new CandidatoDTO(nombre, apellido, cargo, cedula, edad);
+		String res = "";
 		
 		if (buscarUnCandidato(cedula, lst) == null) {
 			lst.add(agregar);
 			archivo.escribirEnArchivo(lst);
-			return true;
+			res = "El candidato se creó correctamente";
 		} else {
 			JOptionPane.showMessageDialog(null, "El candidato ya se encuentra registrado");
-			return false;
+			res = "El candidato ya existe";
 		}
+		return res;
 	}
 	
-	public void eliminarUsuario(long cedula, ArrayList<CandidatoDTO> lst) {
+	public String eliminarUsuario(long cedula, ArrayList<CandidatoDTO> lst) {
 		String aux = cedula + "";
+		String res = ""; 
 		if (!aux.equals("")) {
 			if (buscarUnCandidato(cedula, lst) != null) {
 				try {
@@ -53,22 +56,24 @@ public class CandidatoDAO {
 					archivo.getArchivo().delete();
 					archivo.getArchivo().createNewFile();
 					archivo.escribirEnArchivo(lst);
-					JOptionPane.showMessageDialog(null, "El candidato se elimino correctamente");
+					res = "El candidato se elimino correctamente";
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "El candidato ingresado no se encuentra registrado");
+				res = "El candidato ingresado no se encuentra registrado";
 			}
 		}
+		return res;
 	}
 	
-	public void modificar_Candidato(String nombre, String apellido, String cargo, long cedula, int edad,
+	public String modificar_Candidato(String nombre, String apellido, String cargo, long cedula, int edad,
 			ArrayList<CandidatoDTO> lst) {
 
 		CandidatoDTO agregar = new CandidatoDTO(nombre, apellido, cargo, cedula, edad);
 		
 		String aux = cedula + "";
+		String res = "";
 		
 		if (!aux.equals("")) {
 			if (buscarUnCandidato(cedula, lst) != null) {
@@ -78,14 +83,15 @@ public class CandidatoDAO {
 					archivo.getArchivo().delete();
 					archivo.getArchivo().createNewFile();
 					archivo.escribirEnArchivo(lst);
-					JOptionPane.showMessageDialog(null, "El candidato se modifico correctamente");
+					 res = "El candidato se modifico correctamente";
 				} catch (IOException e1) {
 					e1.printStackTrace();
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "El candidato ingresado no se encuentra registrado");
+				res = "El candidato ingresado no se encuentra registrado";
 			}
 		}
+		return res;
 	}
 	
 }

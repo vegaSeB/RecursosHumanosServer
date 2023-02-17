@@ -27,7 +27,6 @@ public class Servidor extends Thread{
     private int	port;
     private String addressClient;
     private Scanner res = new Scanner(System.in);
-    private int[][] cuadricula = {{0,0,0},{0,0,0},{0,0,0}};
   
     // constructor with port 
     public Servidor(int port){ 
@@ -40,27 +39,6 @@ public class Servidor extends Thread{
     	this.port=port;
     	this.addressClient=addressClient;
      
-    }
-    
-    public void confimarG() {
-    	
-    	
-    	
-    }
-    public void comprobarF(int fila) {
-    	
-    	
-    	
-    }
-    public void comprobarC(int columna) {
-    	
-    	
-    	
-    }
-    public void comprobarD() {
-    	
-    	
-    	
     }
     @Override
     public void run(){

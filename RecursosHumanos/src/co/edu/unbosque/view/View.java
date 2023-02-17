@@ -83,6 +83,15 @@ public class View{
 		
 		return JOptionPane.showInputDialog(null, "Ingrese la cedula de la persona a buscar");
 		
+	}
+	public void mostrar(String msg) {
+		
+		JOptionPane.showMessageDialog(null, msg);
+		
+	}
+	public void error(String err) {
+		
+		JOptionPane.showInternalMessageDialog(null, err, "ERROR", JOptionPane.ERROR_MESSAGE, null);
 		
 	}
 
