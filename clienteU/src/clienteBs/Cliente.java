@@ -34,7 +34,6 @@ public class Cliente extends Thread{
     	// initialize socket and input output streams 
         this.socket= null;
         this.server=null;
-        this.sn=new Scanner(System.in);
         this.out= null;
         this.address=address;
         this.port=port;
@@ -60,7 +59,6 @@ public class Cliente extends Thread{
                 this.out = new DataOutputStream(socket.getOutputStream()); 
         		
         		//line = this.input.readLine(); 
-                line=sn.next();
                 this.out.writeUTF(line);
                 //close socket and output stream
                 this.out.close(); 
