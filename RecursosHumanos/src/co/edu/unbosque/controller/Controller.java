@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import co.edu.unbosque.model.CandidatoDTO;
+import co.edu.unbosque.model.Cliente;
 import co.edu.unbosque.model.persistence.Archivo;
 import co.edu.unbosque.model.persistence.CandidatoDAO;
 import co.edu.unbosque.view.View;
@@ -20,6 +21,7 @@ public class Controller implements ActionListener, MouseWheelListener {
 	private CandidatoDAO canDAO;
 	private ArrayList<CandidatoDTO> lst;
 	private int op;
+	private Cliente cli;
 	private long eliminar;
 
 	/**
@@ -31,6 +33,7 @@ public class Controller implements ActionListener, MouseWheelListener {
 		vi.getPrincipal().setVisible(true);
 		arr = new Archivo();
 		canDAO = new CandidatoDAO(arr);
+		cli = new Cliente("127.0.0.1",5000);
 		lst = arr.leerArchivo();
 		op = 0;
 		eliminar = 0;
@@ -58,20 +61,36 @@ public class Controller implements ActionListener, MouseWheelListener {
 			op = 3;
 			vi.getPrincipal().setVisible(false);
 			String aux = vi.buscar();
-			if (aux.contentEquals("")) {
+			if (aux == null) {
+				vi.mostrar("Debe ingresar algun valor");
+				vi.getPrincipal().setVisible(true);
+			} if (aux.contentEquals("")) {
 				vi.mostrar("Debe ingresar algun valor");
 				vi.getPrincipal().setVisible(true);
 			} else {
-				if (canDAO.buscarUnCandidato(Long.parseLong(aux), lst) == null) {
+				cli.start();
+				if (cli.recibir() == null) {
 					vi.mostrar("La cedula no coincide con ningun candidato");
 					vi.getPrincipal().setVisible(true);
 				} else {
-					CandidatoDTO del = canDAO.buscarUnCandidato(Long.parseLong(aux), lst);
-					vi.getCandidato().getNombre().setText(del.getNombre());
-					vi.getCandidato().getApellido().setText(del.getApellido());
-					vi.getCandidato().getCargo().setText(del.getCargo());
-					vi.getCandidato().getCedula().setText(del.getCedula() + "");
-					vi.getCandidato().getEdad().setText(del.getEdad() + "");
+//					CandidatoDTO del = canDAO.buscarUnCandidato(Long.parseLong(aux), lst);
+					String cand = cli.recibir();
+					
+					String nombre = cand.substring(cand.indexOf('_')+2, cand.indexOf('/')-1);
+					cand = cand.substring(cand.indexOf('_')+2, cand.length());
+					String apellido = cand.substring(cand.indexOf('/')+2,cand.indexOf('_')-1);
+					cand = cand.substring(cand.indexOf('/')+2,cand.length());
+					String cargo = cand.substring(cand.indexOf('_')+2, cand.indexOf('/')-1);
+					cand = cand.substring(cand.indexOf('_')+2,cand.length());
+					String cedula = cand.substring(cand.indexOf('/')+2, cand.indexOf('_')-1);
+					cand = cand.substring(cand.indexOf('/')+2,cand.length());
+					String edad = cand.substring(cand.indexOf('_')+2, cand.length());
+					
+					vi.getCandidato().getNombre().setText(nombre);
+					vi.getCandidato().getApellido().setText(apellido);
+					vi.getCandidato().getCargo().setText(cargo);
+					vi.getCandidato().getCedula().setText(cedula);
+					vi.getCandidato().getEdad().setText(edad);
 					vi.getCandidato().setVisible(true);
 				}
 			}
@@ -121,7 +140,12 @@ public class Controller implements ActionListener, MouseWheelListener {
 			} else {
 				long cedula = Long.parseLong(vi.getCrear().getCedula().getText());
 				int edad = Integer.parseInt(vi.getCrear().getEdad().getText());
-				vi.mostrar(canDAO.agregar_Candidato(nombre, apellido, cargo, cedula, edad, lst));
+//				vi.mostrar(canDAO.agregar_Candidato(nombre, apellido, cargo, cedula, edad, lst));
+				
+				cli.setOpcion(1);
+				cli.setDatos(nombre + " / " + apellido + " _ " + cargo + " / " + cedula + " _ " + edad);
+				cli.start();
+				vi.mostrar("El usuario se agregó correctamente");
 				vi.getCrear().getNombre().setText("");
 				vi.getCrear().getApellido().setText("");
 				vi.getCrear().getCargo().setText("");
