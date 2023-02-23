@@ -61,12 +61,14 @@ public class Cliente extends Thread {
 				String aux = "CREAR _ " + datos; 
 				this.enviar(aux);
 				suspend();
+				break;
 			}
-//			case 2: {
-//				String aux = "BUSCAR _ " + datos; 
-//				this.enviar(aux);
-//				suspend();
-//			}
+			case 2: {
+				String aux = "BUSCAR _ " + datos; 
+				this.enviar(aux);
+				suspend();
+				break;
+			}
 			}
 
 	}

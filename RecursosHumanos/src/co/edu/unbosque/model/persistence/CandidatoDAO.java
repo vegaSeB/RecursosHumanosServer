@@ -39,7 +39,7 @@ public class CandidatoDAO {
 			archivo.escribirEnArchivo(lst);
 			res = "El candidato se creó correctamente";
 		} else {
-			JOptionPane.showMessageDialog(null, "El candidato ya se encuentra registrado");
+
 			res = "El candidato ya existe";
 		}
 		return res;

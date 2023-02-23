@@ -33,7 +33,7 @@ public class Controller implements ActionListener, MouseWheelListener {
 		vi.getPrincipal().setVisible(true);
 		arr = new Archivo();
 		canDAO = new CandidatoDAO(arr);
-		cli = new Cliente("127.0.0.1",5000);
+		cli = new Cliente("127.0.0.1",5001);
 		lst = arr.leerArchivo();
 		op = 0;
 		eliminar = 0;
@@ -151,10 +151,9 @@ public class Controller implements ActionListener, MouseWheelListener {
 				vi.getCrear().getCargo().setText("");
 				vi.getCrear().getCedula().setText("");
 				vi.getCrear().getEdad().setText("");
-
-				vi.getPrincipal().setVisible(true);
 				vi.getCrear().setVisible(false);
-
+				vi.getPrincipal().setVisible(true);
+				
 			}
 		} else if (pt.equals("ATRAS")) {
 			if (op == 1) {
