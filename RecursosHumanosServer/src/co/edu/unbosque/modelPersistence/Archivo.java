@@ -1,4 +1,4 @@
-package co.edu.unbosque.model.persistence;
+package co.edu.unbosque.modelPersistence;
 
 import java.io.File;
 import java.io.FileInputStream;

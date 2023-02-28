@@ -21,12 +21,6 @@ public class CandidatoDTO implements Serializable{
 	public CandidatoDTO() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	@Override
-	public String toString() {
-		return "CandidatoDTO [nombre=" + nombre + ", apellido=" + apellido + ", cargo=" + cargo + ", cedula=" + cedula
-				+ ", edad=" + edad + "]";
-	}
 
 	public String getNombre() {
 		return nombre;
