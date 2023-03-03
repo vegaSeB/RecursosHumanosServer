@@ -1,16 +1,15 @@
-package co.edu.unbosque.server;
+package co.edu.unbosque.controller;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 
 import co.edu.unbosque.model.CandidatoDTO;
 import co.edu.unbosque.modelPersistence.Archivo;
 import co.edu.unbosque.modelPersistence.CandidatoDAO;
 
-public class Servidor extends Thread {
+public class Controller extends Thread{
 
 	private ServerSocket servidor;
 	private Socket cliente, respuesta;
@@ -21,7 +20,7 @@ public class Servidor extends Thread {
 	private Archivo arr;
 	private String loc;
 
-	public Servidor(int portt) {
+	public Controller(int portt) {
 		// TODO Auto-generated constructor stub
 		try {
 			servidor = null;
@@ -37,7 +36,7 @@ public class Servidor extends Thread {
 			// TODO: handle exception
 		}
 	}
-
+	
 	public void run() {
 		while (true) {
 			try {
@@ -107,12 +106,5 @@ public class Servidor extends Thread {
 		}
 
 	}
-
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		Servidor ser = new Servidor(5000);
-		ser.start();
-
-	}
-
+	
 }
