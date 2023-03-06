@@ -1,6 +1,6 @@
 # RecursosHumanos
 ## Descripción
-Este repositorio contiene una solución de software desarrollada por [VegaSeB](https://github.com/vegaSeB) y [Portamelo](https://github.com/PORTAMELO), con el fin de dar solución de software a un problema en la organización de los candidatos de una empresa cualquiera.
+Este repositorio contiene una solución de software desarrollada por [VegaSeB](https://github.com/vegaSeB) , [usapanda](https://github.com/usapanda) y  [Portamelo](https://github.com/PORTAMELO), con el fin de dar solución de software a un problema en la organización de los candidatos de una empresa cualquiera.
 ### Ambiente
 El proyecto esta totalmente desarrollado en lenguaje de programación de java, en el IDE Eclipse.
 ## Resumen
